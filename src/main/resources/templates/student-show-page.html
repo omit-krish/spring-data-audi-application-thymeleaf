@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>spring-application-thymeleaf</title>
+</head>
+<body>
+
+<div align="center">
+    <h1>Student -Details</h1>
+<form action="#" th:action="@{/submit-student}" method="post" th:object="${studentEnquiryDTO}">
+
+<label>Name:</label>
+<input type="text" th:field="*{name}"/><br><br>
+    <label>courseName :</label>
+
+    <select th:field="*{courseName}">
+       <option th:value="'Hibernate'" th:text="Hibernate">Hibernate</option>
+        <option th:value="'ReactJs'" th:text="ReactJs">ReactJs</option>
+        <option th:value="'JavaScript'" th:text="JavaScript">java Script</option>
+    </select><br><br>
+    <label>Experience:</label>
+    <input type="number" th:field="*{exp}"/><br><br>
+
+    <input type="submit" value="Submit">
+
+</form>
+</div>
+</body>
+</html>
