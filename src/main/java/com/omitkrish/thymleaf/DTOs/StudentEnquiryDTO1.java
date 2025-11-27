@@ -1,12 +1,21 @@
 package com.omitkrish.thymleaf.DTOs;
 
-public class StudentEnquiryDTO {
+public class StudentEnquiryDTO1 {
 
+    private Integer id;
     private String name;
 
     private String courseName;
 
     private Integer exp;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -35,7 +44,8 @@ public class StudentEnquiryDTO {
     @Override
     public String toString() {
         return "StudentEnquiryDTO{" +
-                "name='" + name + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 ", courseName='" + courseName + '\'' +
                 ", exp=" + exp +
                 '}';

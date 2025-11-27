@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>student-lists</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+</head>
+<body>
+
+
+<div class="container">
+    <a th:href="@{/student-page}" class="btn btn-primary">Add-Students</a>
+    <table class="table table-striped">
+        <thead class="table-warning">
+        <tr>
+            <th>
+                <a th:href="@{/student-list-by-conditions(pageNumber=${studentPageable.currentPage}, studentName='name', sortBy=${sortBy})}">Student Name</a>
+            </th>
+            <th>Course</th>
+            <th>Experience</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="student : ${allStudents}">
+            <td th:text="${student.name}"></td>
+            <td th:text="${student.courseName}"></td>
+            <td th:text="${student.exp}"></td>
+            <td>
+                <a th:href="@{/update-student(studentId=${student.id})}">Update</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    page size [[${studentPageable.pageSize}]]||totalStudents [[${studentPageable.totalStudents}]]||totalPages [[${studentPageable.totalPages}]]||currentPage [[${studentPageable.currentPage}]]
+
+    <br/><br/><br/>
+    <div>
+
+        <a th:if="${studentPageable.currentPage>1}" th:href="@{/student-page-wise-list(pageNumber=${studentPageable.currentPage-1})}">Previous</a>
+        <span>
+        <a th:unless="${studentPageable.currentPage>1}">Previous</a>
+    </span>
+    |
+        <a th:if="${studentPageable.currentPage>1}" th:href="@{/student-page-wise-list(pageNumber=${studentPageable.currentPage-1})}">First</a>
+    <span>
+        <a th:unless="${studentPageable.currentPage>1}">First</a>
+    </span>
+    &nbsp;
+
+
+        <span th:each="page : ${#numbers.sequence(1, studentPageable.totalPages)}">
+    <!-- Current page: show as plain text -->
+    <span th:if="${page==studentPageable.currentPage}" th:text="${page}" class="active"></span>
+
+            <!-- Other pages: show as links -->
+    <a th:if="${page!=studentPageable.currentPage}"
+       th:href="@{/student-page-wise-list(pageNumber=${page})}"
+       th:text="${page}"></a>&nbsp;
+</span>
+
+    &nbsp;
+        <a href="#" th:if="${studentPageable.currentPage<studentPageable.totalPages}" th:href="@{/student-page-wise-list(pageNumber=${studentPageable.currentPage+1})}">Next</a>
+    <span>
+       <a th:unless="${studentPageable.currentPage!=studentPageable.totalPages}">next</a>
+
+    </span>
+        |
+        <a th:if="${studentPageable.currentPage<studentPageable.totalPages}" th:href="@{/student-page-wise-list(pageNumber=${studentPageable.totalPages})}">Last</a>
+    <span>
+        <a th:unless="${studentPageable.currentPage!=studentPageable.totalPages}">Last</a>
+
+
+    </span>
+    </div>
+</div>
+</body>
+</html>

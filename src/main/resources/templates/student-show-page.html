@@ -8,8 +8,8 @@
 
 <div align="center">
     <h1>Student -Details</h1>
-<form action="#" th:action="@{/submit-student}" method="post" th:object="${studentEnquiryDTO}">
-
+<form action="#" th:action="@{/submit-student}" method="post" th:object="${studentEnquiryDTO1}">
+<input type="hidden" th:field="*{id}">
 <label>Name:</label>
 <input type="text" th:field="*{name}"/><br><br>
     <label>courseName :</label>
